@@ -37,7 +37,7 @@ def results_data(keywords="movies"):
             return final_data
 
     except:
-        pass
+        return 0
 
 
 results_data("google")
