@@ -6,7 +6,6 @@ headers = {
 
 
 def results_data(keywords="movies"):
-
     final_data = []
 
     try:
@@ -24,12 +23,12 @@ def results_data(keywords="movies"):
         
         else:
             id = 0
-            for x in data_containers:
+            for container in data_containers:
                 data_dict = {
                     "id": id,
-                    "title": (x.h3.string),
-                    "link": (x.a["href"]),
-                    "path": (x.span.string)
+                    "title": (container.h3.string),
+                    "link": (container.a["href"]),
+                    "path": (container.span.string)
                 }
                 final_data.append(data_dict)
                 id += 1
@@ -40,4 +39,4 @@ def results_data(keywords="movies"):
         return 0
 
 
-results_data("google")
+
