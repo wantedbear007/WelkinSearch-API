@@ -18,25 +18,26 @@ def results_data(keywords="movies"):
         data_parent = page_contents.find("div", {"id": "search"})
 
         data_containers = data_parent.findAll("div", class_="yuRUbf")
-        id = 0
-        for x in data_containers:
-            data_dict = {
-                "id": id,
-                "title": x.h3,
-                "link": (x.a["href"])
-            }
 
-            final_data.append(data_dict)
+        if len(data_containers) == 0:
+            return False
+        
+        else:
+            id = 0
+            for x in data_containers:
+                data_dict = {
+                    "id": id,
+                    "title": (x.h3.string),
+                    "link": (x.a["href"]),
+                    "path": (x.span.string)
+                }
+                final_data.append(data_dict)
+                id += 1
 
-            # print("-"*40)
-            # print((x.h3).text)
-            # y = x.a
-            id += 1
-            # print(y["href"])
-        return final_data
+            return final_data
 
     except:
         pass
 
 
-results_data("india")
+results_data("google")
