@@ -1,32 +1,33 @@
+from asyncio import sleep
 from tempfile import tempdir
 from bs4 import BeautifulSoup
 from requests import get
+import time
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36'}
-
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/101.0.4951.41 Safari/537.36', "accept-encoding": "gzip, deflate, br", "accept-language": "en-US,en;q=0.9", "content-type": "application/x-www-form-urlencoded;charset=UTF-8", "sec-ch-ua-platform": "Windows"}
 
 def results_data():
-    final_data = []
+    details_data = []
 
     try:
-        url = "https://drive.google.com/drive/mobile/folders/0BzL6M5WpOxAdTTJRaW4yZFhMeTQ/0BzL6M5WpOxAdUW1ON2RwWS1YZk0?sort=13&direction=a"
-        # url = f"https://www.google.com/search?q=site%3Adrive.google.com+{keywords}"
+        url = "https://drive.google.com/drive/folders/0BzL6M5WpOxAdUW1ON2RwWS1YZk0?%3Fsort=13&direction=a&resourcekey=0-8dUsMxL2N68MPYiPX3oQiw"
         page = get(url, headers=headers)
+        page_contents = BeautifulSoup(page.content , "lxml")
+        parent_container = page_contents.find("div", {"class": "iZmuQc"})
 
-        page_contents = BeautifulSoup(page.content, "html.parser")
-        # data_parent = page_contents.find("div", {"class" : "VIrDCd"})
-        data_parent = page_contents.find("div", {"class" : "pdAMZe"})
+        data_containers = parent_container.find_all("div" ,{"jscontroller" : "LPQUTd"})
 
-        data_containers = data_parent.findAll("div", {"jsname": "LvFR7c"})
-        # data_containers = data_parent.findAll("div", {"jscontroller": "LPQUTd"})
-        
         for container in data_containers:
-            print("-" * 40) 
-            temp = container.find("div" , {"class", "Q5txwe"})
-            print(temp)
-            # print(container)
+            print("*"*40)
+            z = (container["data-id"])
+            # print(z["data-id"])
+
+            print(z)
+
         print(len(data_containers))
+        
+      
       
     except:
         print("error occurred")

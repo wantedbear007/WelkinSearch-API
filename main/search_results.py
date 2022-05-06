@@ -13,7 +13,7 @@ def results_data(keywords="movies"):
         url = f"https://www.google.com/search?q=site%3Adrive.google.com+{keywords}"
         page = get(url, headers=headers)
 
-        page_contents = BeautifulSoup(page.content, "html.parser")
+        page_contents = BeautifulSoup(page.content, "lxml")
         data_parent = page_contents.find("div", {"id": "search"})
 
         data_containers = data_parent.findAll("div", class_="yuRUbf")
