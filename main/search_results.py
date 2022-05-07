@@ -1,3 +1,4 @@
+from tkinter.tix import Tree
 from bs4 import BeautifulSoup
 from requests import get
 
@@ -23,12 +24,20 @@ def results_data(keywords="movies"):
         
         else:
             id = 0
+            # folder = False
             for container in data_containers:
+                drive_link = (container.a["href"])
+                # folder_check = drive_link.replace("https://drive.google.com/drive/", "")
+                # if folder_check[0] == "f":
+                #     folder = True
+
+                # folder = True if folder_check[0] == "f" else False
                 data_dict = {
                     "id": id,
                     "title": (container.h3.string),
-                    "link": (container.a["href"]),
-                    "path": (container.span.string)
+                    "link": drive_link,
+                    "path": (container.span.string),
+                    # "folder": folder
                 }
                 final_data.append(data_dict)
                 id += 1
