@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
-from search_results import results_data
-from archive_details import drive_files
+from search_results import search_results
+from archive_details import archive_details
 
 
 app = Flask(__name__)
@@ -9,14 +9,14 @@ api = Api(app)
 
 class search(Resource):
     def get(self, keywords):
-        search_result = results_data(keywords=keywords)
+        search_result = search_results(keywords=keywords)
         return search_result, 200
 
     
 class drive_details(Resource):
     def post(self):
         data = request.get_json()
-        z = drive_files(data["link"])
+        z = archive_details(data["link"])
         return z, 200
 
 
