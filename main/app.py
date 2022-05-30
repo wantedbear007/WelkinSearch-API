@@ -24,4 +24,5 @@ api.add_resource(search, '/search/<string:keywords>')
 api.add_resource(drive_details, '/drive', endpoint = 'drive')
 
 if "__main__" == __name__:
-    app.run(debug=True)
+    app.run()
+    # app.run(debug=True)

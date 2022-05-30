@@ -12,14 +12,17 @@ def results_data(keywords="movies"):
     try:
 
         url = f"https://www.google.com/search?q=site%3Adrive.google.com+{keywords}"
+        # # url = "https://www.google.com/search?q=site%3Adrive.google.com+movies&ei=OYaQYou-PJGE2roPirST-AY&ved=0ahUKEwjLvomhnP_3AhURglYBHQraBG8Q4dUDCA4&uact=5&oq=site%3Adrive.google.com+movies&gs_lcp=Cgdnd3Mtd2l6EANKBAhBGAFKBAhGGABQowFYyyFg5SJoAnAAeACAAYABiAHQCJIBAzAuOZgBAKABAcABAQ&sclient=gws-wiz"
         page = get(url, headers=headers)
 
-        page_contents = BeautifulSoup(page.content, "lxml")
+        page_contents = BeautifulSoup(page.content, "html.parser")
+        
         data_parent = page_contents.find("div", {"id": "search"})
 
         data_containers = data_parent.findAll("div", class_="yuRUbf")
 
         if len(data_containers) == 0:
+            
             return False
         
         else:
@@ -41,11 +44,13 @@ def results_data(keywords="movies"):
                 }
                 final_data.append(data_dict)
                 id += 1
-
+            # print(final_data)
             return final_data
 
     except:
+        # print("not found")
         return 0
 
+results_data("movies")
 
 
