@@ -1,4 +1,3 @@
-from tkinter.tix import Tree
 from bs4 import BeautifulSoup
 from requests import get
 
@@ -16,13 +15,10 @@ def search_results(keywords="movies"):
         page = get(url, headers=headers)
 
         page_contents = BeautifulSoup(page.content, "html.parser")
-        
         data_parent = page_contents.find("div", {"id": "search"})
-
         data_containers = data_parent.findAll("div", class_="yuRUbf")
 
         if len(data_containers) == 0:
-            
             return False
         
         else:
@@ -51,6 +47,6 @@ def search_results(keywords="movies"):
         # print("not found")
         return 0
 
-# results_data("movies")
+# print(search_results("movies"))
 
 
