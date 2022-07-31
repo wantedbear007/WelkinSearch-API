@@ -1,6 +1,6 @@
 {
     "name":"Welkin search",
-    "version":1,
+    "version":2,
     "builds": [
         {
             "src":"main.py",
